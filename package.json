@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "http-server ./speaker-cards"
+    "serve": "http-server ./speaker-cards"
   },
   "author": "David Neal <david@reverentgeek.com> (https://reverentgeek.com)",
   "license": "MIT",
@@ -12,6 +12,8 @@
     "eslint": "^6.0.1"
   },
   "dependencies": {
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.1",
     "chalk": "^2.4.2",
     "fs-extra": "^8.0.1",
     "handlebars": "^4.1.2",

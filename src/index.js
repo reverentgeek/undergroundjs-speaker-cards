@@ -1,8 +1,14 @@
+"use strict";
+
 const fs = require( "fs-extra" );
 const handlebars = require( "handlebars" );
 const log = require( "./logger" );
 const speakerJson = "./src/speaker_data.json";
 const open = require( "open" );
+const { spawn } = require( "child_process" );
+const hapi = require( "@hapi/hapi" );
+const path = require( "path" );
+const inert = require( "@hapi/inert" );
 
 const getTwitterHandle = twitterLink => {
   return "@" + twitterLink.replace( "https://twitter.com/", "" );
@@ -44,8 +50,8 @@ Excited to have ${ speaker.twitter } at @undergroundjs present "${ speaker.bio }
   } );	  
 };
 
-const renderSpeakerCards = async speakers => {
-  speakers.forEach( async speaker => {
+const renderSpeakerCards = speakers => {
+  speakers.forEach( speaker => {
     const url = `http://localhost:8080/${ speaker.slug }.html`;
     log.info( `rendering ${ url }` );
     open( url );
@@ -64,12 +70,51 @@ const buildSpeakerHtmlCards = async speakers => {
   } );
 };
 
+const launchServer = async () => {
+  try {
+    const speakerPath = path.resolve( __dirname, "..", "speaker-cards" );
+    const server = hapi.server( {
+      port: 8080,
+      routes: {
+        files: {
+          relativeTo: speakerPath
+        }
+      }
+    } );
+    await server.register( inert );
+    server.route( {
+      method: "GET",
+      path: "/{param*}",
+      handler: {
+        directory: {
+          path: ".",
+          redirectToSlash: true
+        }
+      }
+    } );
+    await server.start();
+    log.info( `server running at: ${ server.info.uri } pointed to ${ speakerPath }` );
+    return server;
+  } catch ( err ) {
+    log.error( `launchServer error: ${ err.message }` );
+  }
+};
+
 const main = async () => {
+  const fileExists = await fs.exists( speakerJson );
+  if ( !fileExists ){
+    log.error( "The speaker_data.json file is missing!" );
+    return;
+  }
   const rawSpeakers = await fs.readJSON( speakerJson );
   const speakers = await normalizeSpeakerData( rawSpeakers );
   await generateTweets( speakers );
   await buildSpeakerHtmlCards( speakers );
-  await renderSpeakerCards( speakers );
+  await launchServer();
+  renderSpeakerCards( speakers );
+  // setTimeout( () => {
+  //   server.stop();
+  // }, 2000 );
 };
 
 main();

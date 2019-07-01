@@ -4,28 +4,39 @@
 	width: 1024px;
 	height: 512px;
 	color: #fff;
-	font-family: "Aller Light";
 	position: relative;
 }
 
-#speaker-card .title {
+#speaker-card .name {
 	color: #f58705;
-	font-family: "Gotham HTF";
+	font-family: "Luckiest Guy";
+	font-weight: normal;
+	text-transform: uppercase;
+	font-size: 4.0em;
 	position: absolute;
 	top: 230px;
 	left: 370px;
-	font-size: 3.0em;
 	text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
 }
 
-#speaker-card .subtitle {
+#speaker-card .title {
+	font-family: "Freckle Face";
 	color: #ffffff;
 	position: absolute;
 	left: 370px;
 	top: 350px;
-	font-size: 1.75em;
+	font-size: 2.5em;
 	font-weight: bold;
 	padding: 0 60px 0 0;
+}
+
+#speaker-card .twitter {
+	font-family: "Luckiest Guy";
+	position: absolute;
+	left: 370px;
+	top: 300px;
+	font-size: 1.25em;
+	color: #aaa;
 }
 
 .avatar-wrapper {
@@ -62,12 +73,4 @@
 	top: 490px;
 	font-size: 1.75em;
 	font-weight: bold;
-}
-.twitter {
-	position: absolute;
-	left: 370px;
-	top: 450px;
-	font-size: 1.75em;
-	font-weight: bold;
-	color: #aaa;
 }
