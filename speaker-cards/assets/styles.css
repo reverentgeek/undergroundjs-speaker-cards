@@ -20,6 +20,7 @@
 }
 
 #speaker-card .title {
+	/* font-family: "Trade Winds"; */
 	font-family: "Freckle Face";
 	color: #ffffff;
 	position: absolute;

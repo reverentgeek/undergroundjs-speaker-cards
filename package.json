@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "serve": "http-server ./speaker-cards"
+    "start": "node ."
   },
   "author": "David Neal <david@reverentgeek.com> (https://reverentgeek.com)",
   "license": "MIT",
@@ -17,7 +17,6 @@
     "chalk": "^2.4.2",
     "fs-extra": "^8.0.1",
     "handlebars": "^4.1.2",
-    "http-server": "^0.11.1",
     "open": "^6.3.0",
     "winston": "^3.2.1",
     "yargs": "^13.2.4"
